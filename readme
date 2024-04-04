@@ -1,0 +1,6 @@
+install pouchdb
+npm install pouchdb
+
+#install webserver
+python -m http.server
+
