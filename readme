@@ -1,6 +1,8 @@
 install pouchdb
 npm install pouchdb
 
-#install webserver
-python -m http.server
+
+docker build -t couchdb .
+
+docker run -it -p 5984:5984 -v $PWD/docker/opt/couchdb/data localfirstDB
 

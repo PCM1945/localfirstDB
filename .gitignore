@@ -1,2 +1,4 @@
 ./client2DB
 ./client1DB
+./syncDB
+./dbdata

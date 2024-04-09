@@ -1,6 +1,4 @@
 var PouchDB = require('pouchdb');
-const readLineSync = require('readline');
-
 const readline = require('readline');
 //const fileStream = fs.createReadStream('input.txt');
 
@@ -10,22 +8,23 @@ const rl = readline.createInterface({
 });
 
 
-dbName = 'client2DB'
-docId = 'doc'
+dbName = 'http://localhost:5984/client2'
+otherdb = "http://localhost:5984/client1"
+docId = '001'
 const emptyDocument = {
     "_id" : docId,
-    '_rev': 0,
      "counter": 0
   } 
   
-var db = new PouchDB(dbName);
+var db = new PouchDB(dbName, {auth: {username: 'pedro', password: '1234'}});
+
 //var db = new PouchDB('http://localhost:4321/dataBase')
 //db.changes()
 
-sync()
+//sync()
 
 function sync(){
-    var sync = PouchDB.sync(`${dbName}`, `./client1DB`, {
+    var sync = PouchDB.sync(`${dbName}`, otherdb, {
         live: true,
         retry: true
     }).on('change', function (info) {
@@ -87,7 +86,7 @@ async function main(){
             case('4'):
                 let response = await getDoc(docId)
                 if(response){
-                     console.log(response['counter']);
+                     console.log(`counter: ${response['counter']}`);
                 }
                
             break;
